@@ -1,0 +1,24 @@
+DECLARE
+    v_product_id   products.product_id%TYPE := 301; -- Example product ID
+    v_price        products.price%TYPE;
+    v_discounted   products.price%TYPE;
+BEGIN
+    -- Fetch product price
+    SELECT price
+    INTO v_price
+    FROM products
+    WHERE product_id = v_product_id;
+
+    -- Apply discount rules
+    IF v_price > 10000 THEN
+        v_discounted := v_price * 0.80; -- 20% discount
+        DBMS_OUTPUT.PUT_LINE('20% discount applied. Final Price = ' || v_discounted);
+    ELSIF v_price BETWEEN 5000 AND 10000 THEN
+        v_discounted := v_price * 0.90; -- 10% discount
+        DBMS_OUTPUT.PUT_LINE('10% discount applied. Final Price = ' || v_discounted);
+    ELSE
+        v_discounted := v_price; -- No discount
+        DBMS_OUTPUT.PUT_LINE('No discount. Final Price = ' || v_discounted);
+    END IF;
+END;
+/
