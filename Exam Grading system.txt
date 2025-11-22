@@ -1,0 +1,22 @@
+DECLARE
+    v_student_id   students.student_id%TYPE := 101; -- Example student ID
+    v_marks        students.marks%TYPE;
+BEGIN
+    -- Fetch the student's marks
+    SELECT marks
+    INTO v_marks
+    FROM students
+    WHERE student_id = v_student_id;
+
+    -- Check conditions and print result
+    IF v_marks >= 90 THEN
+        DBMS_OUTPUT.PUT_LINE('Excellent');
+    ELSIF v_marks BETWEEN 70 AND 89 THEN
+        DBMS_OUTPUT.PUT_LINE('Good');
+    ELSIF v_marks BETWEEN 50 AND 69 THEN
+        DBMS_OUTPUT.PUT_LINE('Pass');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('Fail');
+    END IF;
+END;
+/
